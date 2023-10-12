@@ -6,8 +6,7 @@ Is an application that takes in user input to generate a logo and save it as an 
 
 
 Screencastify Link:
-https://drive.google.com/file/d/1sPc0EY5LxevcFYFQV9PMWtBvk8hid1oc/view
-
+https://drive.google.com/file/d/1Pims6bJksUp-rF7YP9t3YlyhbSLtYx1J/view
 
 ## Credits:
 used: index.js, package.json,SVG,JS, ran npm install. 
