@@ -1,43 +1,15 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const {Circle,Square,Triangle} = require("./lib/shapes")
 
-const generateReadMe = (data) =>
-  `# <${data.title}>
+const generateSVG = (data,shape) => {
+  return`<svg height="300" width="200">
+  <text x="0" y="15" fill="${data.textcolor}">${data.logotext}</text>
+  ${shape.render()}
+</svg>
 
-  ## Description
-
-  ${data.description}
-  
-  ## Table of Contents 
-  
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Credits](#credits)
-  - [License](#license)
-  
-  ## Installation
-  ${data.installation}
-  
-  
-  ## Usage
-  ${data.usage}
-  
-  
-      
-  
-  ## Credits
-  ${data.credits}
-  
- 
-  
-  ## License
-${data.license}
-  
-  ---
-  
- 
   `
-
+}
   
   
   
@@ -46,36 +18,56 @@ inquirer
   .prompt([
     {
       type: 'input',
-      name: 'title', //answer labeled 
-      message: 'What is your project called?',
+      name: 'logotext', //answer labeled 
+      message: 'What text is going on your logo, please enter upto 3 characters?',
     },
     {
       type: 'input',
-      name: 'description',
-      message: 'What is the description of the project?', //message user will be asked 
+      name: 'textcolor',
+      message: 'What color do you want the text to be, please enter color?', //message user will be asked 
+    },
+    {
+      type: 'list',
+      name: 'shape',
+      message: 'What shape would you like?',
+      choices: [
+        'circle','square','triangle'
+      ]
+
     },
     {
       type: 'input',
-      name: 'installation',
-      message: 'What is teh installation of the project?',
-    },
-    {
-      type: 'input',
-      name: 'usage',
-      message: 'What is the usage of the project?',
-    },
-    {
-      type: 'input',
-      name: 'license',
-      message: 'Enter your licenses for the project',
+      name: 'shapecolor',
+      message: 'What color would you like the shape to be',
     },
     
-  ])
-  .then((answers) => {
-    const ReadMeContent = generateReadMe(answers);
 
-    fs.writeFile('ReadMe.md', ReadMeContent, (err) =>
-      err ? console.log(err) : console.log('Successfully created ReadMe!')
+
+    
+  ])
+  
+  .then((answers) => {
+    let shape;
+    if (answers.shape=="circle") {
+      shape= new Circle ()
+      
+
+    } else if (answers.shape=="square") {
+      shape= new Square ()
+
+
+    } else {
+      shape= new Triangle ()
+
+    }
+
+    shape.setColor(answers.shapecolor);
+
+
+    const LogoContent = generateSVG(answers,shape);
+
+    fs.writeFile('logo.svg', LogoContent, (err) =>
+      err ? console.log(err) : console.log('Successfully created logo!')
     );
   });
 

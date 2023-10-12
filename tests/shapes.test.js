@@ -1,5 +1,5 @@
 
-const {Circle, Sqaure, Triangle} = require('../lib/shapes.js');
+const {Circle, Square, Triangle} = require('../lib/shapes.js');
 
 describe('Shapes', () => {
     // A test is created to check that sum does in fact return the two numbers added together.
@@ -13,7 +13,7 @@ describe('Shapes', () => {
 
     describe('Square', () => {
         it('should output the SVG for Square', () => {
-          const shape = new Sqaure();
+          const shape = new Square();
            shape.setColor("blue");
          expect(shape.render()).toEqual('<rect width="300" height="100" style="fill:blue;stroke-width:3;stroke:rgb(0,0,0)" />');
         });
